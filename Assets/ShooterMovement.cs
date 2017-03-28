@@ -7,13 +7,18 @@ public class ShooterMovement : MonoBehaviour {
 	public GameObject spearProjectile;
 	public GameObject bombProjectile;
 	public GameObject dustProjectile;
+	SpriteRenderer sprite;
+	float armShift = 0.0f;
 
 	void Start () {
+		sprite = GetComponent<SpriteRenderer> ();
 	}
 
 	void Update () {
 		Vector3 currentPos = player.transform.position;
-		//currentPos.x += .1f; //nudges the shooter a bit to the side
+		currentPos.x -= .10f; //nudges the shooter a bit to the side
+		currentPos.x += armShift;
+		currentPos.y += .18f;
 		currentPos.z -= 2f;
 		transform.position = currentPos;
 
@@ -29,12 +34,20 @@ public class ShooterMovement : MonoBehaviour {
 			PlayerMovement.direction = 'l';
 		}
 
+		if (PlayerMovement.direction == 'l') {
+			sprite.flipY = true;
+			armShift = 0.15f;
+		} else {
+			sprite.flipY = false;
+			armShift = 0.0f;
+		}
+
 		if (Input.GetMouseButtonDown (0) && ComponentManager.canShoot == true) {
 			Vector3 newObjPos = player.transform.position;
 
 			//placing the projectile
 			newObjPos.x += (Mathf.Cos (Mathf.Atan2 (dir.y, dir.x)) * 0.2f);
-			newObjPos.y += (Mathf.Sin (Mathf.Atan2 (dir.y, dir.x)) * 0.2f);
+			newObjPos.y += (Mathf.Sin (Mathf.Atan2 (dir.y, dir.x)) * 0.2f) + 0.1f;
 			newObjPos.z += 10f;
 
 			if (ComponentManager.type == 'e') {

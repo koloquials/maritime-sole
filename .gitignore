@@ -2,3 +2,15 @@
 Library/
 
 ProjectSettings/
+
+obj/
+
+Temp/
+
+*.sln
+
+*.userprefs
+
+*.csproj
+
+\.DS_Store
