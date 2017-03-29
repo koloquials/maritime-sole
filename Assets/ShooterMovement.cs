@@ -22,18 +22,18 @@ public class ShooterMovement : MonoBehaviour {
 		currentPos.z -= 2f;
 		transform.position = currentPos;
 
-		//aims towards mouse
+		//angles shooter towards mouse
 		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
 		Vector3 dir = Input.mousePosition - pos;
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+		//calculates if facing left or right + flips arm sprite
 		if (angle < 90f && angle > -90) {
 			PlayerMovement.direction = 'r';
 		} else {
 			PlayerMovement.direction = 'l';
 		}
-
 		if (PlayerMovement.direction == 'l') {
 			sprite.flipY = true;
 			armShift = 0.15f;
@@ -45,23 +45,21 @@ public class ShooterMovement : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0) && ComponentManager.canShoot == true) {
 			Vector3 newObjPos = player.transform.position;
 
-			//placing the projectile
+			//placing the projectile. its hardcoded because im dead inside and frankly shouldn't be tweaked anyways
 			newObjPos.x += (Mathf.Cos (Mathf.Atan2 (dir.y, dir.x)) * 0.2f);
 			newObjPos.y += (Mathf.Sin (Mathf.Atan2 (dir.y, dir.x)) * 0.2f) + 0.1f;
 			newObjPos.z += 10f;
 
-			if (ComponentManager.type == 'e') {
+			if (ComponentManager.type == 'e') { 
 				SpearBehavior spearBehave = spearProjectile.GetComponent<SpearBehavior> ();
 				spearBehave.velX = (Mathf.Cos (Mathf.Atan2 (dir.y, dir.x)) * 10f);
 				spearBehave.velY = (Mathf.Sin (Mathf.Atan2 (dir.y, dir.x)) * 10f);
 			}
-
 			if (ComponentManager.type == 'r') {
 				BombBehavior bombBehave = bombProjectile.GetComponent<BombBehavior> ();
 				bombBehave.velX = (Mathf.Cos (Mathf.Atan2 (dir.y, dir.x)) * 7f);
 				bombBehave.velY = (Mathf.Sin (Mathf.Atan2 (dir.y, dir.x)) * 7f);
 			}
-
 			if (ComponentManager.type == 'f') {
 				DustBehavior dustBehave = dustProjectile.GetComponent<DustBehavior> ();
 				dustBehave.velX = (Mathf.Cos (Mathf.Atan2 (dir.y, dir.x)) * 4f);
@@ -82,9 +80,11 @@ public class ShooterMovement : MonoBehaviour {
 				GameObject bullet4 = Instantiate (dustProjectile, newObjPos, Quaternion.AngleAxis (angle + Random.Range(-20f, 20f), Vector3.forward)) as GameObject;
 				GameObject bullet5 = Instantiate (dustProjectile, newObjPos, Quaternion.AngleAxis (angle + Random.Range(-20f, 20f), Vector3.forward)) as GameObject;
 			}
+			//maybe replace with an array like a sensible human being later
 		} 
 		else if (Input.GetMouseButtonDown (0) && ComponentManager.canShoot == false){
-			print ("cannot shoot. not enough components loaded!");
+			//print ("cannot shoot. not enough components loaded!");
+			//denial or empty sound goes here
 		}
 	}
 }

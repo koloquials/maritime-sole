@@ -8,6 +8,7 @@ public class SpearBehavior : MonoBehaviour {
 	public float velY = 0f;
 	public float velX = 0f;
 	bool hitSolid = false;
+
 	float f = 1f;
 	int count = 120;
 

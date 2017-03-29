@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 	Rigidbody2D player;
+	Animator anim;
+	float jumpSpeed = 9.5f;
 	float moveSpeed = 0.15f;
 	float backwardSpeed = 0.08f;
 	bool airborne = false;
-	RaycastHit2D hit;
 	public static char direction;
-	Animator anim;
 
 	void Start () {
 		player = GetComponent<Rigidbody2D>();
@@ -17,7 +17,8 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	void Update () {
-		Vector3 currentPos = transform.position;
+
+		//looking in the right direction - meanwhile i wlak backwards into hell
 		anim.SetFloat ("Speed", Mathf.Abs (Input.GetAxis ("Horizontal")));
 		if (direction == 'l') {
 			anim.transform.localRotation = Quaternion.Euler (0, 180, 0);
@@ -25,16 +26,18 @@ public class PlayerMovement : MonoBehaviour {
 			anim.transform.localRotation = Quaternion.Euler (0, 0, 0);
 		}
 
-		//can only jump if not falling
+		//ensure can only jump if not falling + jump animation parameter
 		if (player.velocity.y != 0) {
 			airborne = true;
 		} else {
 			airborne = false;
 		}
+		anim.SetBool ("Jumping", airborne);
 			
-		//keys
+		//movement
+		Vector3 currentPos = transform.position;
 		if (Input.GetKey(KeyCode.W) && airborne == false) {
-			player.AddForce (new Vector2 (0f, 9.5f), ForceMode2D.Impulse);
+			player.AddForce (new Vector2 (0f, jumpSpeed), ForceMode2D.Impulse);
 		}
 		else if (Input.GetKey(KeyCode.A)) {
 			if (direction == 'r') {
