@@ -1,1 +1,15 @@
+Library/
 
+obj/
+
+ProjectSettings/
+
+Temp/
+
+*.sln
+
+*.userprefs
+
+*.csproj
+
+\.DS_Store
