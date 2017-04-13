@@ -29,7 +29,8 @@ public class DustBehavior : MonoBehaviour {
 			}
 			else if (count <= 0) {
 				f -= 0.02f;
-				sprite.color = new Color (0.2f, 0f, 1f, f);
+                sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, f);
+				//sprite.color = new Color (0.2f, 0f, 1f, f);
 				if (f <= 0) {
 					Destroy (this.gameObject);
 				}
