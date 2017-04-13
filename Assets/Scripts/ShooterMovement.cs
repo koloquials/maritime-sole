@@ -26,6 +26,13 @@ public class ShooterMovement : MonoBehaviour {
 		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
 		Vector3 dir = Input.mousePosition - pos;
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Debug.Log(angle); // That is exceptionally useful
+        if(PlayerMovement.direction == 'r' && angle < -30)//Literally just says "Hey, don't go to less than this"
+        {
+            angle = -32;
+        }else if (PlayerMovement.direction == 'l' && angle > -146 && angle<0) {
+            angle = -146;
+        }
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 		//calculates if facing left or right + flips arm sprite
@@ -46,6 +53,7 @@ public class ShooterMovement : MonoBehaviour {
 			Vector3 newObjPos = player.transform.position;
 
 			//placing the projectile. its hardcoded because im dead inside and frankly shouldn't be tweaked anyways
+            //I see Cos, sin, whatever Atan2 is, I am just not going to touch this....
 			newObjPos.x += (Mathf.Cos (Mathf.Atan2 (dir.y, dir.x)) * 0.2f);
 			newObjPos.y += (Mathf.Sin (Mathf.Atan2 (dir.y, dir.x)) * 0.2f) + 0.1f;
 			newObjPos.z += 10f;

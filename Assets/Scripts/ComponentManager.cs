@@ -7,7 +7,7 @@ public class ComponentManager : MonoBehaviour {
 	public GameObject eOrb;
 	public GameObject rOrb;
 	public GameObject fOrb;
-	GameObject[] orbArray = new GameObject[3];
+	public GameObject[] orbArray = new GameObject[3];
 	int total;
 	int eCount; //spear
 	int rCount; //needles
@@ -85,8 +85,16 @@ public class ComponentManager : MonoBehaviour {
 			print ("error! invalid orb letter");
 			break;
 		}
-		startPos.x += (0.4f*orbs);
-		orbArray[orbs] = Instantiate(temp, startPos, Quaternion.AngleAxis(0f, Vector3.forward)) as GameObject;
+        //All the commented out code was diagnosing and failed fixes, leaving it just in case :P -C
+
+        //if (orbArray.Length == 0) {
+            startPos.x += (0.4f * orbs);
+        //}else if(orbArray.Length>0&&orbs>=1){
+            //startPos.x = orbArray[orbs-1].transform.position.x +0.4f;
+       // }else{
+            //Debug.Log("We should never see this");
+       // }
+        orbArray[orbs] = Instantiate(temp, startPos, Quaternion.AngleAxis(0f, Vector3.forward)) as GameObject;
 		orbs++;
 	}
 

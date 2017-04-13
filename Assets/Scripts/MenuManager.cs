@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
 	//oh, honestly i just planned to do this during polish because i didn't know if i wanted cutscenes too or not.
@@ -9,9 +10,11 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetMouseButtonDown (0)) {
-			Application.LoadLevel ("Stage 1");
-			print ("hi");
-		}
-	}
+		
+        if (Input.GetMouseButton(0))
+        {
+            SceneManager.LoadScene("Stage 1");
+            print("hi");
+        }
+    }
 }

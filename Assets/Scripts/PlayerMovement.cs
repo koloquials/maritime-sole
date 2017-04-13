@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		else if (Input.GetKey(KeyCode.A)) {
 			if (direction == 'r') {
+                //You probably need to use force to prevent clipping, and just place an arbitrary speed cap
 				currentPos.x -= backwardSpeed;
 			} else {
 				currentPos.x -= moveSpeed;

@@ -19,11 +19,14 @@ public class PuzzleBehavior : MonoBehaviour {
 			if (activated == true && started == true && pzlRB.velocity.y == 0 && this.gameObject.transform.rotation.z < 1) { //make static after it is done
 				pzlRB.isKinematic = true;
 				pzlRB.freezeRotation = true;
-				//print ("AAAA");
-			}
+                //print ("AAAA");
+                //this.gameObject.layer = 12;
+            }
 			if (activated == true && started == false) { //activate falling
 				pzlRB.isKinematic = false;
 				started = true;
+               // this.gameObject.layer = 16;
+
 			}
 		}
 		if (gameObject.tag == "Raise Puzzle") {
@@ -46,6 +49,9 @@ public class PuzzleBehavior : MonoBehaviour {
 				this.gameObject.SetActive(false);
 			}
 		}
-		//more here
-	}
-}
+        //more here
+    }
+   
+
+
+    }
